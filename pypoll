@@ -1,0 +1,57 @@
+import os
+import csv
+
+csvpath = os.path.join(".", "budget_data.csv")
+print(csvpath)
+
+# Read the CSV file
+with open(csvpath, newline="") as csvfile:
+      print(csvreader)
+    
+    # header 
+    csvreader = csv.reader(csvfile, delimiter=",")
+    csv_header = next(csvfile)
+    print(f"Header: {csv_header}")
+    
+    # Declare variables 
+    greatest_increase = []
+    greatest_increase_date = ""
+    greatest_decrease = []
+    greatest_decrease_date = ""
+   
+    difference = 0
+    net_total = 0
+    previous_value = 0
+    average_change = 0
+     
+    # Total p&l
+    for row in csvreader:    
+        net_total += int(row[1])
+    print(f"Net Total: {net_total}")
+       
+    # Average change 
+    for row in csvreader: 
+        difference = previous_value - int(row[1])
+               
+         
+        # Get previous value
+        previous_value = int(row[1])
+        
+             
+        # Find average of values
+        average_change = sum(L) / len(L)
+        
+        # Greatest increase
+        if difference > greatest_increase:
+            greatest_increase = difference
+            greatest_increase_date = str(row[0])
+        
+        #Greatest decrease
+        if difference < greatest_decrease:
+            greatest_decrease = difference
+            greatest_decrease_date = str(row[0])
+        
+    # Print Statements
+    print(f"Average Change: $ {average_change}")  
+    print(f"Greatest Increase: {greatest_increase_date} ({greatest_increase})")
+    print(f"Greatest Decrease: {greatest_decrease_date} ({greatest_decrease})")
